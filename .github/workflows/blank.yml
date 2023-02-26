@@ -11,28 +11,17 @@ on:
     branches: [ "main" ]
 
 jobs:
-  build:
+  build1:
     runs-on: ubuntu-latest
     container: python:3.9-slim
     steps:
       - name: Checkout
-        uses: actions/checkout@v3
+        run: echo "Hi there!!!"
 
-      - name: Install dependencies
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
-
-      - name: Lint with flake8
-        run: |
-          flake8 service --count --select=E9,F63,F7,F82 --show-source --statistics
-          flake8 service --count --max-complexity=10 --max-line-length=127 --statistics
-
-      - name: Run unit tests with nose
-        run: nosetests -v --with-spec --spec-color --with-coverage --cover-package=app
+     
   deploy:
     runs-on: ubuntu-latest
-    needs: [build]
+    needs: [build1]
     steps:
       - name: Echo
         run: echo "Hi there!!!"
@@ -42,6 +31,9 @@ jobs:
           echo "There are env variables"
           echo "VAR_1: ${{env.VAR_1}}"
           echo "SHA_COMMIT: ${{env.SHA_COMMIT}}"
+          echo "secret1 : ${{ secrets.SECRET_1 }}"
+          echo "secret1 : ${{ secrets.my_env.SECRET_1 }}"
+          
 
           
               
