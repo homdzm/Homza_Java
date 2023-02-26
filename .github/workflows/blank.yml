@@ -31,8 +31,11 @@ jobs:
           echo "There are env variables"
           echo "VAR_1: ${{env.VAR_1}}"
           echo "SHA_COMMIT: ${{env.SHA_COMMIT}}"
+          echo "firstword=hello" >> $GITHUB_OUTPUT
+          echo "secret1 : ${{ secrets.token }}"
+          
+          echo "secret1 : ${{ secrets.my_env.SECRET_1 }}"
           echo "secret1 : ${{ secrets.SECRET_1 }}"
-          echo "secret1 : ${{ my_env.SECRET_1 }}"
           
 
           
